@@ -1,0 +1,31 @@
+
+name: hello-bye #! Name for the test, remember not to use quotes in general. If you are dilibrating going to use string values then use quoutes
+
+on: #! Events
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+    #! Job checkout the our lib and echos hello world.
+    hello:
+        runs-on: ubuntu-latest #! use latest ubuntu machine
+        steps: #! list items and its respective action must be start with 
+            -   name: Checkout the lib  #! description for each below action
+                uses: actions/checkout@v3
+            -   name: Display Hello, Siddharth Emily
+                run: echo "Hello, Siddharth Emily"
+            -   name: Use shell Bash
+                run: bash
+    #! Job to echo without checkout
+    bye:
+        runs-on: windows-latest #!https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources availble hosts
+        steps:
+            -   name: Display Bye
+                run: echo "Bye Siddharth Emily"
+            -   name: Use Shell Bash
+                run: bash
