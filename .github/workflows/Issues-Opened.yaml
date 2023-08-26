@@ -1,0 +1,35 @@
+
+#! name => Events => jobs => steps
+
+name: Issues Example
+
+on:
+    issues:
+        types:
+            - opened
+
+jobs:
+    Create-comment-with-community-action:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Use community action
+                uses: peter-evans/create-or-update-comment@v3
+                with:
+                    issue-number: ${{github.event.issue.number}}
+                    body: |
+                        # This action created by community action
+                        **Siddharth And Emily**
+                    reactions: |
+                        heart
+                        +1
+    comment-with-api:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Create comment with API
+                run: gh api \
+                    repos/{ORGANIZATION}/{REPOSITORY}/issues/{ISSUE_NUMBER}/comments -f body='Hi from CLI'
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    ORGANIZATION: ${{ github.event.organization.login }}
+                    REPOSITORY: ${{ github.event.repository.name }}
+                    ISSUE_NUMBER: ${{ github.event.issue.number }}
