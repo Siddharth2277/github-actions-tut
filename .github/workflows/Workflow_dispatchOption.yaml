@@ -29,6 +29,8 @@ jobs:
                     fi
     SIMPLE_JOB:
         runs-on: ubuntu-latest
+        needs: 
+            workflow_inputs_job
         steps:
             -   name: Echo simple output
                 run: echo "Siddharth Emily"
