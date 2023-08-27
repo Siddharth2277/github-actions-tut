@@ -21,7 +21,7 @@ jobs:
         steps:
             -   name: Check if the pass_key is pass_key
                 run: |
-                    if [ ${{inputs.pass_key}} != "pass_key" ]; then
+                    if [ "${{inputs.pass_key}}" != "pass_key" ]; then
                         echo "Enter pass_key for pass_key field"
                         exit 1
                     fi
