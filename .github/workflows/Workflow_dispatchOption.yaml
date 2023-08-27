@@ -1,0 +1,37 @@
+
+name: workflow_inputs
+
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+        #! How inputs work is when you press the run in github ui, it will pop up an form asking for whatever you passed under the inputs 
+        #! Here you passed passkey to be asked, block under it is the information about the parameter pass_key.
+        inputs:
+            pass_key: 
+                description: "Please enter the passkey"
+                default: "pass_key"
+                required: true
+                type: string
+            
+
+jobs:
+    workflow_inputs_job:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Check if the pass_key is pass_key
+                run: |
+                    if [ ${{inputs.pass_key}} != "pass_key" ]; then
+                        echo "Enter pass_key for pass_key field"
+                        exit 1
+                    else
+                    fi
+    SIMPLE_JOB:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Echo simple output
+                run: echo "Siddharth Emily"
+
+
+
