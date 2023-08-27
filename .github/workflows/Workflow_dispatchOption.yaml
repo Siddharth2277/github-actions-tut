@@ -25,7 +25,6 @@ jobs:
                     if [ ${{inputs.pass_key}} != "pass_key" ]; then
                         echo "Enter pass_key for pass_key field"
                         exit 1
-                    else
                     fi
     SIMPLE_JOB:
         runs-on: ubuntu-latest
