@@ -1,1 +1,6 @@
-<h1>I am special</h1>
+<script lang="ts">
+    //! lint not working
+    const content = "I am special"
+</script>
+
+<h1>{content}</h1>

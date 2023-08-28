@@ -57,3 +57,28 @@ jobs:
                 run: pnpx playwright install
             -   name: Run playwright tests
                 run: pnpm test:integration
+    linter:
+        strategy:
+            matrix:
+                os:
+                    - ubuntu-latest
+                nodeV:
+                    - 16.x
+                    - 18.x
+        runs-on: ${{matrix.os}}
+        steps:
+        -   name: Checkout to the branch
+            uses: actions/checkout@v3
+        -   name: Set node js env
+            uses: actions/setup-node@v2
+            with:
+                node-version: ${{matrix.nodeV}}
+        -   name: Setup pnpm
+            uses: pnpm/action-setup@v2
+            with:
+                version: 8
+        -   name: Instal deps
+            run: pnpm install
+        -   name: lint the repo
+            run: pnpm lint
+        
