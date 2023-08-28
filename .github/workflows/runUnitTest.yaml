@@ -1,0 +1,29 @@
+
+
+name: Run unit test
+
+on: 
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+    runUnitTestJob:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                nodeV: [16.x,18.x]
+        steps:
+            -   name: Checkout the repo
+                uses: actions/checkout@v3
+            -   name: node-js setup
+                uses: actions/setup-node
+                with:
+                    node-version: ${{matrix.nodeV}}
+                    cache: 'npm'
+            -   name: npm install
+                uses: npm ci
+            -   name: Run testing
+                uses: npm test:unit
+    
