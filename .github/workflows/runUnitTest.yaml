@@ -21,9 +21,12 @@ jobs:
                 uses: actions/setup-node@v3
                 with:
                     node-version: ${{matrix.nodeV}}
-                    cache: 'npm'
-            -   name: npm install
-                run: npm ci
+            -   name: pnpm setup
+                uses: pnpm/action-setup@v2
+                with:
+                    version: 8
+            -   name: install deps
+                run: pnpm install
             -   name: Run testings
-                run : npm test:unit
+                run : pnpm test:unit
     
