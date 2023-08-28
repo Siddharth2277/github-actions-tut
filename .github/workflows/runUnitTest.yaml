@@ -18,12 +18,12 @@ jobs:
             -   name: Checkout the repo
                 uses: actions/checkout@v3
             -   name: node-js setup
-                uses: actions/setup-node
+                uses: actions/setup-node@v3
                 with:
                     node-version: ${{matrix.nodeV}}
                     cache: 'npm'
             -   name: npm install
-                uses: npm ci
+                run: npm ci
             -   name: Run testings
                 run : npm test:unit
     
