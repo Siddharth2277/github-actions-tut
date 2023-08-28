@@ -23,7 +23,7 @@ jobs:
                     node-version: ${{matrix.nodeV}}
                     cache: 'npm'
             -   name: npm install
-                uses: npm ci
+                run: npm ci
             -   name: Run testings
                 run : npm test:unit
     
