@@ -77,5 +77,5 @@ jobs:
           version: 8
       - name: Instal deps
         run: pnpm install
-      - name: lint the repo
+      - name: Lint the repo
         run: pnpm lint
