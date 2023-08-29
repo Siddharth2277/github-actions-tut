@@ -79,6 +79,7 @@ jobs:
                 version: 8
         -   name: Instal deps
             run: pnpm install
+        -   name: Execute prettier
+            run: pnpm format
         -   name: lint the repo
             run: pnpm lint
-        
