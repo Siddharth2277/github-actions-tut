@@ -25,3 +25,13 @@ jobs:
                     echo "::endgroup"
             -   name: Add mask
                 run: echo "::add-mask::Secret string"
+    annotate_in_Windows:
+        runs-on: windows-latest
+        steps:
+            -   name: In Windows, error msg
+                run: echo "::error title=Win error::This is a error msg in windows using echo"
+    annotate_in_macos:
+        runs-on: macos-latest
+        steps:
+            -   name: In macos, error msg
+                run: echo "::error title=mac error::This is a error msg in macos using echo"
