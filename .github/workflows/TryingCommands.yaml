@@ -23,3 +23,5 @@ jobs:
                     echo "::group::This a group start"
                     echo "Inside group"
                     echo "::endgroup"
+            -   name: Add mask
+                run: echo "::add-mask::Secret string"
