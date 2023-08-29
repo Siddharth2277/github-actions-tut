@@ -1,0 +1,28 @@
+name: Catch the output
+defaults: #! By default all jobs use bash shell
+  run:
+    shell: bash
+on:
+  push:
+    branches:
+      - main
+jobs:
+  printAction: #! this is the job id
+    runs-on: windows-latest
+    steps:
+      - name: Print Emily Siddharth using Action
+        id: stepId1 #! this is step id
+        uses: actions/hello-world-javascript-action@main
+        with:
+          who-to-greet: Siddharth and Emily #! There is no built way to access the input like output.
+      - name: Get time
+        run: echo "${{steps.stepId1.outputs.time}}"
+      - name: Test If I am using bash Shell
+        run: ls -a
+      - name: Fail the below test
+        shell: python
+        run: import
+        id: stepid2
+        continue-on-error: true
+      - name: Print i am running
+        run: echo "${{steps.stepid2.conclusion}}"

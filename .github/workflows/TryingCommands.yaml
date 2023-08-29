@@ -1,37 +1,37 @@
 name: Trying out annotation commands
 
 on:
-    push:
-        branches:
-            - main
-    workflow_dispatch:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-    annotate_samples:
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Using error msg
-                run: echo "::error title=Error file=TryingCommands.yaml::This is error msg"
-            -   name: Using Warning msg
-                run: echo "::warning title=Warning file=Trying commands.yaml::This is a warn msg"
-            -   name: This is a debug msg
-                run: echo "::debug title:Debug ::This is a debug shit"
-            -   name: Notice msg
-                run: echo "::notice title=Notice:This is a notice message"
-            -   name: This is group message
-                run: |
-                    echo "::group::This a group start"
-                    echo "Inside group"
-                    echo "::endgroup"
-            -   name: Add mask
-                run: echo "::add-mask::Secret string"
-    annotate_in_Windows:
-        runs-on: windows-latest
-        steps:
-            -   name: In Windows, error msg
-                run: echo "::error title=Win error::This is a error msg in windows using echo"
-    annotate_in_macos:
-        runs-on: macos-latest
-        steps:
-            -   name: In macos, error msg
-                run: echo "::error title=mac error::This is a error msg in macos using echo"
+  annotate_samples:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Using error msg
+        run: echo "::error title=Error file=TryingCommands.yaml::This is error msg"
+      - name: Using Warning msg
+        run: echo "::warning title=Warning file=Trying commands.yaml::This is a warn msg"
+      - name: This is a debug msg
+        run: echo "::debug title:Debug ::This is a debug shit"
+      - name: Notice msg
+        run: echo "::notice title=Notice:This is a notice message"
+      - name: This is group message
+        run: |
+          echo "::group::This a group start"
+          echo "Inside group"
+          echo "::endgroup"
+      - name: Add mask
+        run: echo "::add-mask::Secret string"
+  annotate_in_Windows:
+    runs-on: windows-latest
+    steps:
+      - name: In Windows, error msg
+        run: echo "::error title=Win error::This is a error msg in windows using echo"
+  annotate_in_macos:
+    runs-on: macos-latest
+    steps:
+      - name: In macos, error msg
+        run: echo "::error title=mac error::This is a error msg in macos using echo"
