@@ -15,7 +15,7 @@ jobs:
             -   name: Using Warning msg
                 run: echo "::warning title=Warning file=Trying commands.yaml::This is a warn msg"
             -   name: This is a debug msg
-                run: echo "::debug title=Debug::This is a debug shit"
+                run: echo "::debug title:Debug ::This is a debug shit"
             -   name: Notice msg
                 run: echo "::notice title=Notice:This is a notice message"
             -   name: This is group message
