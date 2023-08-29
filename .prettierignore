@@ -5,11 +5,15 @@ node_modules
 /package
 .env
 .env.*
+dist
+.eslintrc.cjs
+.storybook
+.vscode
 !.env.example
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
-.prettierrc
-.prettierignore
+playwright.config.ts
+vite.config.*

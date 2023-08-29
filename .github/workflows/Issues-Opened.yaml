@@ -1,24 +1,23 @@
-
 #! name => Events => jobs => steps
 
 name: Issues Example
 
 on:
-    issues:
-        types:
-            - opened
+  issues:
+    types:
+      - opened
 
 jobs:
-    Create-comment-with-community-action:
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Use community action
-                uses: peter-evans/create-or-update-comment@v3
-                with:
-                    issue-number: ${{github.event.issue.number}}
-                    body: |
-                        # This action created by community action
-                        **Siddharth And Emily**
-                    reactions: |
-                        heart
-                        +1
+  Create-comment-with-community-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use community action
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{github.event.issue.number}}
+          body: |
+            # This action created by community action
+            **Siddharth And Emily**
+          reactions: |
+            heart
+            +1

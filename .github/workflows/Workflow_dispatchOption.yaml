@@ -1,36 +1,30 @@
-
 name: workflow_inputs
 
 on:
-    workflow_dispatch:
-        #! Things To keep in mind
-        #! - workflow dispatch is also an event but slightly different because it does not run automatically. Why? Remember workflow-dispatch is button in ui of github and there is no events along side workflow_dispatch i.e push, pull, issues 
-        #! the idea of this event is to run the workflow only on manual trigger, cause it might additional dynamic input 
-        #! Say you have a production site, and you found there is bug in production site, and you want to commit your corrected code to staging site and check if it works normally and commit to prod if it passes. Which attributes to the fact the file that handles deployment should not run without manual intervention. You have dynamic parameters and respective scripts to deploy whether in staging or production server.
-        inputs:
-            pass_key: 
-                description: "Please enter the passkey"
-                required: true
-                type: string
-            
+  workflow_dispatch:
+    #! Things To keep in mind
+    #! - workflow dispatch is also an event but slightly different because it does not run automatically. Why? Remember workflow-dispatch is button in ui of github and there is no events along side workflow_dispatch i.e push, pull, issues
+    #! the idea of this event is to run the workflow only on manual trigger, cause it might additional dynamic input
+    #! Say you have a production site, and you found there is bug in production site, and you want to commit your corrected code to staging site and check if it works normally and commit to prod if it passes. Which attributes to the fact the file that handles deployment should not run without manual intervention. You have dynamic parameters and respective scripts to deploy whether in staging or production server.
+    inputs:
+      pass_key:
+        description: "Please enter the passkey"
+        required: true
+        type: string
 
 jobs:
-    workflow_inputs_job:
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Check if the pass_key is pass_key
-                run: |
-                    if [ "${{inputs.pass_key}}" != "pass_key" ]; then
-                        echo "Enter pass_key for pass_key field"
-                        exit 1
-                    fi
-    SIMPLE_JOB:
-        runs-on: ubuntu-latest
-        needs: 
-            workflow_inputs_job
-        steps:
-            -   name: Echo simple output
-                run: echo "Siddharth Emily"
-
-
-
+  workflow_inputs_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if the pass_key is pass_key
+        run: |
+          if [ "${{inputs.pass_key}}" != "pass_key" ]; then
+              echo "Enter pass_key for pass_key field"
+              exit 1
+          fi
+  SIMPLE_JOB:
+    runs-on: ubuntu-latest
+    needs: workflow_inputs_job
+    steps:
+      - name: Echo simple output
+        run: echo "Siddharth Emily"

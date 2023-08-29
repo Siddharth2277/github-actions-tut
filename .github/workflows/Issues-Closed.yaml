@@ -1,22 +1,22 @@
 name: Comment Closed Issue
 
 on:
-    issues:
-        types:
-            - closed
-    workflow_dispatch:
+  issues:
+    types:
+      - closed
+  workflow_dispatch:
 
 jobs:
-    Closed_issue:
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Comment on close
-                uses: peter-evans/create-or-update-comment@v3
-                with:
-                    issue-number: ${{github.event.issue.number}}
-                    body: |
-                       **Siddharth Emily**
-                        Closed the action
-                    reactions: |
-                        +1
-                        heart
+  Closed_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment on close
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{github.event.issue.number}}
+          body: |
+            **Siddharth Emily**
+             Closed the action
+          reactions: |
+            +1
+            heart

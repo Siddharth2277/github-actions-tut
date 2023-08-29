@@ -1,85 +1,83 @@
-
-
 name: Run unit test
 
-on: 
-    push:
-        branches:
-            - main
-    workflow_dispatch:
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-    runUnitTestJob:
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                nodeV: [16.x,18.x]
-        steps:
-            -   name: Checkout the repo
-                uses: actions/checkout@v3
-            -   name: node-js setup
-                uses: actions/setup-node@v3
-                with:
-                    node-version: ${{matrix.nodeV}}
-            -   name: pnpm setup
-                uses: pnpm/action-setup@v2
-                with:
-                    version: 8
-            -   name: install deps
-                run: pnpm install
-            -   name: Run testings
-                run : pnpm test:unit
-    runTestIntegration:
-        strategy:
-            matrix:
-                nodeV:
-                    - 16.x
-                    - 18.x
-                os:
-                    - windows-latest
-                    - ubuntu-latest
-                    - macos-latest
-        runs-on: ${{matrix.os}}
-        steps:
-            -   name: Checkout the lib
-                uses: actions/checkout@v3
-            -   name: Set-up node js
-                uses: actions/setup-node@v2
-                with:
-                    node-version: ${{matrix.nodeV}}
-            -   name: Setup pnpm
-                uses: pnpm/action-setup@v2
-                with:
-                    version: 8
-            -   name: Install packages
-                run: pnpm install
-            -   name: Install browser for playwright
-                run: pnpx playwright install
-            -   name: Run playwright tests
-                run: pnpm test:integration
-    linter:
-        strategy:
-            matrix:
-                os:
-                    - ubuntu-latest
-                nodeV:
-                    - 16.x
-                    - 18.x
-        runs-on: ${{matrix.os}}
-        steps:
-        -   name: Checkout to the branch
-            uses: actions/checkout@v3
-        -   name: Set node js env
-            uses: actions/setup-node@v2
-            with:
-                node-version: ${{matrix.nodeV}}
-        -   name: Setup pnpm
-            uses: pnpm/action-setup@v2
-            with:
-                version: 8
-        -   name: Instal deps
-            run: pnpm install
-        -   name: Execute prettier
-            run: pnpm format
-        -   name: lint the repo
-            run: pnpm lint
+  runUnitTestJob:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        nodeV: [16.x, 18.x]
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+      - name: node-js setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.nodeV}}
+      - name: pnpm setup
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: install deps
+        run: pnpm install
+      - name: Run testings
+        run: pnpm test:unit
+  runTestIntegration:
+    strategy:
+      matrix:
+        nodeV:
+          - 16.x
+          - 18.x
+        os:
+          - windows-latest
+          - ubuntu-latest
+          - macos-latest
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Checkout the lib
+        uses: actions/checkout@v3
+      - name: Set-up node js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.nodeV}}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Install packages
+        run: pnpm install
+      - name: Install browser for playwright
+        run: pnpx playwright install
+      - name: Run playwright tests
+        run: pnpm test:integration
+  linter:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        nodeV:
+          - 16.x
+          - 18.x
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v3
+      - name: Set node js env
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.nodeV}}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Instal deps
+        run: pnpm install
+      - name: Format using prettier
+        run: pnpm run format
+      - name: lint the repo
+        run: pnpm lint
