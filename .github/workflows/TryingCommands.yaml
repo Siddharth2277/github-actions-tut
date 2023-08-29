@@ -1,0 +1,25 @@
+name: Trying out annotation commands
+
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+    annotate_samples:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Using error msg
+                run: echo "::error title=Error file=TryingCommands.yaml::This is error msg"
+            -   name: Using Warning msg
+                run: echo "::warning title=Warning file=Trying commands.yaml::This is a warn msg"
+            -   name: This is a debug msg
+                run: echo "::debug title:Debug ::This is a debug shit"
+            -   name: Notice msg
+                run: echo"::notice title=Notice ::This is a notice message"
+            -   name: This is group message
+                run: |
+                    echo "::group::This a group start"
+                    echo "Inside group"
+                    echo "::endgroup"

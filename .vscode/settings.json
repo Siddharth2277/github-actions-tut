@@ -1,5 +1,8 @@
 {
     "cSpell.enableFiletypes": [
         "github-actions-workflow"
+    ],
+    "cSpell.words": [
+        "endgroup"
     ]
 }
