@@ -21,7 +21,11 @@ jobs:
         run: ls -a
       - name: Fail the below test
         shell: python
-        run: import
+        run: |
+          try:
+              import
+          except SyntaxError:
+              print("::error::The 'import' statement failed due to a syntax error.")
         id: stepid2
         continue-on-error: true
       - name: Print i am running
