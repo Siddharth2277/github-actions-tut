@@ -55,6 +55,37 @@ jobs:
         run: pnpx playwright install
       - name: Run playwright tests
         run: pnpm test:integration
+  runTestVisual:
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+        nodeV: [16.x, 18.x]
+    runs-on: ${{matrix.os}}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Setup node environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{matrix.nodeV}}
+      - name: Setup pnpm environment
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Checkout lib
+        uses: actions/checkout@v3
+      - name: Install PNPM
+        run: pnpm install
+      - name: Install Playwright
+        run: pnpm install playwright
+      - name: Build StoryBook
+        run: pnpm build-storybook
+      - name: Serve and Test
+        run: |
+          pnpx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+          "pnpx http-server storybook-static --port 6006 --silent" \
+          "pnpx wait-on tcp:6006 && pnpm test-storybook"
   linter:
     strategy:
       matrix:
